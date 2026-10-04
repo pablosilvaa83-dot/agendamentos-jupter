@@ -16,29 +16,39 @@ label{display:block;font-size:12px;font-weight:800;margin-bottom:6px;color:#3440
 .badge{display:inline-flex;align-items:center;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:800;background:#eef3ff;color:var(--blue2)}.rule{border-left:4px solid var(--blue);padding:10px 12px;background:var(--light);border-radius:8px;margin:8px 0;font-size:13px}.special{border-color:#f79009;background:#fff7ed}.btn{border:0;border-radius:10px;padding:12px 16px;font-weight:800;cursor:pointer}.primary{background:var(--blue);color:white}.secondary{background:#eef3ff;color:var(--blue2)}.danger{background:#fff1f0;color:var(--danger)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.summary{display:none;margin-top:16px;border:1px solid #a6f4c5;background:#ecfdf3;padding:14px;border-radius:12px}.summary.show{display:block}
 .schedule{overflow:auto}.week{display:grid;grid-template-columns:90px repeat(5,minmax(140px,1fr));min-width:820px;border:1px solid var(--line);border-radius:12px;overflow:hidden}.cell{padding:10px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:54px;background:white;font-size:12px}.head{font-weight:800;background:#f7f9fc;text-align:center}.time{font-weight:800;background:#f7f9fc}.lunch{background:#fff7ed;color:#b54708;font-weight:800;text-align:center}.blocked{background:#fef3f2;color:#b42318;font-weight:800}.booked{background:#eef4ff;color:#264a99;font-weight:800}.free{color:#98a2b3}.admin-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}.kpi{background:#f8faff;border:1px solid var(--line);padding:14px;border-radius:12px}.kpi b{display:block;font-size:24px;color:var(--blue2)}.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{padding:10px;border-bottom:1px solid #e7ecf4;text-align:left;vertical-align:top}.table th{background:#f8faff}.hidden{display:none!important}.small{font-size:11px;color:var(--muted)}
 @media(max-width:760px){.grid,.grid3{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}header img{width:58px;height:58px}}
+
+/* Portal Jupter — identidade azul, formulário simplificado e responsivo. */
+body{background:#f4f6fa}header{background:#fff;color:var(--text);border-bottom:1px solid var(--line);box-shadow:none;position:static;padding:20px max(24px,calc((100vw - 1020px)/2));gap:20px}header img{width:88px;height:88px;object-fit:contain;border:0;border-radius:0}header h1{font-size:21px;letter-spacing:-.4px}.sub{color:var(--muted);line-height:1.6}.wrap{max-width:1020px;margin:24px auto}.tabs{padding:5px;background:#e9edf5;border-radius:12px;gap:4px}.tab{background:transparent;border:0;color:#53617a;flex:1;min-height:44px}.tab.active{background:#fff;color:var(--blue2);box-shadow:0 2px 6px #223a6810}.welcome{background:linear-gradient(120deg,#223b78,#3756a6);color:white;border-radius:20px;padding:36px;margin-bottom:20px}.eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;color:#cedcff}.welcome h2{font-size:36px;line-height:1.15;letter-spacing:-1px;margin:15px 0}.welcome p{font-size:15px;line-height:1.6;max-width:610px;color:#e0e8fa}.welcome-info{display:flex;gap:40px;margin:26px 0;font-size:13px;line-height:1.8;color:#e0e8fa}.welcome-info b{display:block;font-size:15px;color:white}.notice{border-top:1px solid #ffffff30;padding-top:18px;font-size:13px;line-height:1.6;color:#edf3ff}.card{padding:26px;border-radius:16px;box-shadow:0 3px 12px #23376104}.card h2{display:flex;align-items:center;gap:11px}.step{display:inline-flex;align-items:center;justify-content:center;width:29px;height:29px;border-radius:9px;background:#edf2ff;color:var(--blue);font-size:14px}.section-intro{margin:10px 0 22px}.grid,.grid3{gap:20px}label{font-size:13px;font-weight:600}input,select,textarea{min-height:45px;background:#fff}summary{font-size:14px;font-weight:700;cursor:pointer;color:var(--blue2)}.rules{padding:18px 24px}.btn{min-height:44px}.primary{box-shadow:0 4px 10px #3756a622}.btn:disabled{opacity:.6;cursor:wait}.actions{margin-top:24px}button:focus-visible,summary:focus-visible{outline:3px solid #8bafff;outline-offset:3px}
+@media(max-width:760px){header{padding:16px;gap:12px}header h1{font-size:17px}header img{width:66px;height:66px}.sub{font-size:11px}.wrap{padding:0 12px 32px;margin-top:16px}.welcome{padding:26px 22px}.welcome h2{font-size:29px}.welcome-info{flex-direction:column;gap:12px}.card{padding:20px}.rules{padding:16px 20px}.tab{font-size:12px;padding:10px 6px}.actions .btn{flex:1}.card h2{font-size:17px}}
 </style>
 </head>
 <body>
-<header><img src="logo-jupter.jpeg" alt="Jupter Distribuidora"><div><h1>Agendamento de Recebimento</h1><div class="sub">Jupter Distribuidora • agenda inteligente por tipo de veículo, descarga e fornecedor</div></div></header>
+<header><img src="logo-jupter.jpeg" alt="Jupter Distribuidora"><div><h1>Agendamento de Recebimento</h1><div class="sub">Jupter Distribuidora • Portal de recebimento</div></div></header>
 <div class="wrap">
   <div class="tabs"><button class="tab active" data-tab="booking">Agendar descarga</button><button class="tab" data-tab="agenda">Consultar agenda</button><button class="tab" data-tab="admin">Área interna</button></div>
 
   <section id="booking">
-    <div class="card"><h2>Regras de ocupação da agenda</h2><div class="hint">A duração é calculada automaticamente. O sistema considera a regra mais restritiva entre veículo, forma de descarga e fornecedor.</div>
-      <div class="grid3" style="margin-top:12px">
-        <div class="rule"><b>Carreta</b><br>Reserva meio período.</div><div class="rule"><b>Bi-trem</b><br>Reserva o dia inteiro.</div><div class="rule"><b>Truck / Van</b><br>Reserva por horário.</div>
-        <div class="rule"><b>Paletizado</b><br>1 horário.</div><div class="rule"><b>Batido</b><br>2 ou 3 horários consecutivos.</div><div class="rule special"><b>Exceções</b><br>Fornecedores especiais bloqueiam a agenda conforme regra própria.</div>
-      </div>
+    <div class="welcome">
+      <span class="eyebrow">PORTAL DO FORNECEDOR</span>
+      <h2>Programe sua entrega<br>com tranquilidade.</h2>
+      <p>Informe os dados da carga e escolha uma janela disponível para o recebimento na Jupter.</p>
+      <div class="welcome-info"><span><b>Segunda a sexta</b>Recebimento das 07h às 18h</span><span><b>Agendamento prévio</b>Atendimento por horário agendado</span></div>
+      <div class="notice">O recebimento segue o horário agendado, e não a ordem de chegada. Intervalo das 12h às 13h.</div>
     </div>
+    <details class="card rules"><summary>Como funciona a reserva de horário?</summary>
+      <p class="hint">A janela considera o veículo, o tipo de descarga e as regras do fornecedor.</p>
+      <div class="grid3"><div class="rule"><b>Truck / Van</b><br>Paletizado: 1 horário.</div><div class="rule"><b>Carreta / Bi-trem</b><br>Meio período / dia inteiro.</div><div class="rule"><b>Carga batida</b><br>2 ou 3 horários consecutivos.</div></div>
+      <p class="hint">Fornecedores especiais seguem regras próprias. A disponibilidade aparece após o preenchimento dos dados.</p>
+    </details>
 
-    <div class="card"><h2>Dados do fornecedor</h2><div class="grid">
+    <div class="card"><h2><span class="step">1</span> Dados do fornecedor</h2><p class="hint section-intro">Informe os contatos para identificar sua entrega. Campos com * são obrigatórios.</p><div class="grid">
       <div><label>Fornecedor *</label><input id="supplier" list="suppliers" placeholder="Digite ou selecione"><datalist id="suppliers"><option value="GALVANOTEK"><option value="FIBRAFORM"><option value="ZPP"></datalist></div>
       <div><label>CNPJ</label><input id="cnpj" placeholder="00.000.000/0000-00"></div>
       <div><label>Nome do responsável *</label><input id="contact"></div><div><label>Telefone / WhatsApp *</label><input id="phone"></div>
       <div><label>Motorista *</label><input id="driver"></div><div><label>Placa *</label><input id="plate" style="text-transform:uppercase"></div>
     </div></div>
 
-    <div class="card"><h2>Características da entrega</h2><div class="grid3">
+    <div class="card"><h2><span class="step">2</span> Dados da entrega</h2><p class="hint section-intro">As características da carga definem o tempo necessário para a descarga.</p><div class="grid3">
       <div><label>Veículo *</label><select id="vehicle"><option value="">Selecione</option><option>CARRETA</option><option>BI-TREM</option><option>TRUCK</option><option>VAN</option></select></div>
       <div><label>Tipo de descarga *</label><select id="unload"><option value="">Selecione</option><option>PALETIZADO</option><option>BATIDO</option></select></div>
       <div id="batidoWrap" class="hidden"><label>Duração batido *</label><select id="batido"><option value="2">2 horários</option><option value="3">3 horários</option></select></div>
@@ -48,7 +58,7 @@ label{display:block;font-size:12px;font-weight:800;margin-bottom:6px;color:#3440
       <div><label>Anexar pedido (opcional)</label><input type="file" id="orderFile"></div><div><label>Anexar NF-e (opcional)</label><input type="file" id="nfeFile"></div>
     </div></div>
 
-    <div class="card"><h2>Data e janela disponível</h2><div class="grid">
+    <div class="card"><h2><span class="step">3</span> Escolha a data e o horário</h2><p class="hint section-intro">Selecione uma janela disponível e confirme seu agendamento.</p><div class="grid">
       <div><label>Data desejada *</label><input type="date" id="date"></div><div><label>Horário / período *</label><select id="slot"><option value="">Selecione a data primeiro</option></select></div>
       <div class="full" id="ruleResult"></div>
     </div><div class="actions"><button class="btn primary" id="bookBtn">Confirmar agendamento</button><button class="btn secondary" id="clearBtn">Limpar</button></div><div class="summary" id="summary"></div></div>
@@ -79,7 +89,9 @@ const SUPABASE_URL='https://xyzyqigkagclrddyfhpe.supabase.co';
 const SUPABASE_KEY='sb_publishable_7GNeHIIqVSSEv-Eg8K_Mpw_Y2AsHGix';
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const ADMIN_EMAIL='suprimentos@jupterembalagens.com.br';
-const baseSlots=['10:00','11:00','13:00','14:00','15:00','16:00','17:00'];
+const morningSlots=['07:00','08:00','09:00','10:00','11:00'];
+const afternoonSlots=['13:00','14:00','15:00','16:00','17:00','18:00'];
+const baseSlots=[...morningSlots,...afternoonSlots];
 const $=id=>document.getElementById(id);
 let adminBookings=[];
 const tabs=document.querySelectorAll('.tab');
@@ -90,13 +102,24 @@ function rule(){const sup=norm($('supplier').value),veh=$('vehicle').value,un=$(
  if(veh==='CARRETA'){kind='half';label='meio período'} if(veh==='BI-TREM'){kind='day';label='dia inteiro'}
  if(un==='BATIDO'){hours=Number($('batido').value||2); if(kind==='slot'){kind='multi';label=hours+' horários consecutivos'}}
  if(sup==='GALVANOTEK'){kind='day';label='dia inteiro (regra GALVANOTEK)';special=true}
- if(sup==='ZPP'){kind='half';label='meio período (regra ZPP)';special=true}
+ if(sup==='ZPP'){if(kind!=='day'){kind='half';label='meio período (regra ZPP)'}special=true}
  if(sup==='FIBRAFORM'){special=true; if(veh==='BI-TREM'){kind='day';label='dia inteiro (FIBRAFORM + BI-TREM)'} else if(veh==='CARRETA'){kind='half';label='meio período (FIBRAFORM + CARRETA)'} }
  return {kind,hours,label,special,supplier:sup,vehicle:veh,unload:un};}
 function updateRule(){const r=rule();let msg='<span class="badge">Reserva prevista: '+r.label+'</span>'; if(r.supplier==='FIBRAFORM' && r.vehicle && !['CARRETA','BI-TREM'].includes(r.vehicle)) msg+=' <span class="badge" style="background:#fff1f0;color:#b42318">FIBRAFORM: usar CARRETA ou BI-TREM</span>'; $('ruleResult').innerHTML=msg;refreshSlots()}
-async function usedSlots(date){const {data,error}=await sb.from('agenda_blocks').select('slot').eq('booking_date',date);if(error){console.error(error);return new Set()}return new Set((data||[]).map(x=>x.slot))}
-function candidates(r){if(r.kind==='day') return [{value:'DIA TODO',occ:[...baseSlots]}];if(r.kind==='half')return [{value:'MANHÃ',occ:['10:00','11:00']},{value:'TARDE',occ:['13:00','14:00','15:00','16:00','17:00']}];if(r.kind==='multi'){let a=[];for(let i=0;i<=baseSlots.length-r.hours;i++){let occ=baseSlots.slice(i,i+r.hours); if(occ.includes('11:00')&&occ.includes('13:00')) continue; a.push({value:occ[0]+'–'+occ[occ.length-1],occ})}return a}return baseSlots.map(s=>({value:s,occ:[s]}));}
-async function refreshSlots(){const d=$('date').value,r=rule(),sel=$('slot');sel.innerHTML='';if(!d){sel.innerHTML='<option value="">Selecione a data primeiro</option>';return}sel.innerHTML='<option value="">Carregando disponibilidade...</option>';let used=await usedSlots(d);let valid=candidates(r).filter(c=>c.occ.every(s=>!used.has(s)));if(r.supplier==='FIBRAFORM'&&r.vehicle&&!['CARRETA','BI-TREM'].includes(r.vehicle))valid=[];sel.innerHTML='<option value="">Selecione</option>'+valid.map(c=>`<option value="${c.value}" data-occ="${c.occ.join(',')}">${c.value}</option>`).join('');if(!valid.length)sel.innerHTML='<option value="">Sem disponibilidade para esta regra</option>';}
+async function usedSlots(date){const {data,error}=await sb.from('agenda_blocks').select('slot').eq('booking_date',date);if(error){throw error}return new Set((data||[]).map(x=>x.slot))}
+function candidates(r){if(r.kind==='day') return [{value:'DIA TODO',occ:[...baseSlots]}];if(r.kind==='half')return [{value:'MANHÃ',occ:[...morningSlots]},{value:'TARDE',occ:[...afternoonSlots]}];if(r.kind==='multi'){let a=[];for(let i=0;i<=baseSlots.length-r.hours;i++){let occ=baseSlots.slice(i,i+r.hours); if(occ.includes('11:00')&&occ.includes('13:00')) continue; a.push({value:occ[0]+'–'+occ[occ.length-1],occ})}return a}return baseSlots.map(s=>({value:s,occ:[s]}));}
+let availabilityRequest=0;
+async function refreshSlots(){const request=++availabilityRequest,d=$('date').value,r=rule(),sel=$('slot');sel.innerHTML='';if(!d){sel.innerHTML='<option value="">Selecione a data primeiro</option>';return}
+ const weekday=new Date(d+'T12:00:00').getDay();
+ if(d<isoLocal(new Date())||weekday===0||weekday===6){sel.innerHTML='<option value="">Escolha uma data futura de segunda a sexta</option>';return}
+ sel.innerHTML='<option value="">Carregando disponibilidade...</option>';
+ try{const used=await usedSlots(d);if(request!==availabilityRequest)return;
+ let valid=candidates(r).filter(c=>c.occ.every(s=>!used.has(s)));
+ if(r.supplier==='FIBRAFORM'&&r.vehicle&&!['CARRETA','BI-TREM'].includes(r.vehicle))valid=[];
+ sel.innerHTML='<option value="">Selecione</option>'+valid.map(c=>`<option value="${c.value}" data-occ="${c.occ.join(',')}">${c.value}</option>`).join('');
+ if(!valid.length)sel.innerHTML='<option value="">Sem disponibilidade para esta regra</option>';
+ }catch(error){if(request!==availabilityRequest)return;sel.innerHTML='<option value="">Não foi possível consultar. Selecione a data novamente.</option>';}
+}
 function valid(){return $('supplier').value&&$('contact').value&&$('phone').value&&$('driver').value&&$('plate').value&&$('vehicle').value&&$('unload').value&&$('volumes').value&&$('date').value&&$('slot').value}
 $('bookBtn').onclick=async()=>{if(!valid()){alert('Preencha os campos obrigatórios e escolha uma janela disponível.');return}const r=rule(); if(r.supplier==='FIBRAFORM'&&!['CARRETA','BI-TREM'].includes(r.vehicle)){alert('Para FIBRAFORM, selecione CARRETA ou BI-TREM.');return}const opt=$('slot').selectedOptions[0],occ=(opt.dataset.occ||'').split(',').filter(Boolean);$('bookBtn').disabled=true;$('bookBtn').textContent='Confirmando...';
  const {data,error}=await sb.rpc('create_booking',{p_booking_date:$('date').value,p_slot_label:$('slot').value,p_occupied_slots:occ,p_supplier:$('supplier').value,p_cnpj:$('cnpj').value||null,p_contact_name:$('contact').value,p_phone:$('phone').value,p_driver_name:$('driver').value,p_plate:$('plate').value.toUpperCase(),p_vehicle:r.vehicle,p_unload_type:r.unload,p_volumes:Number($('volumes').value),p_pallets:$('pallets').value?Number($('pallets').value):null,p_weight_kg:$('weight').value?Number($('weight').value):null,p_purchase_order:$('po').value||null,p_nfe:$('nfe').value||null,p_sku_count:$('skus').value?Number($('skus').value):null,p_notes:$('notes').value||null,p_rule_label:r.label,p_is_special:r.special});
@@ -113,6 +136,8 @@ $('logoutBtn').onclick=async()=>{await sb.auth.signOut();await renderAdmin()};
 window.cancelBooking=async id=>{if(!confirm('Cancelar este agendamento e liberar os horários?'))return;const {error}=await sb.rpc('cancel_booking',{p_booking_id:id});if(error){alert(error.message);return}await loadAdminBookings();await renderWeek();}
 $('exportBtn').onclick=()=>{let rows=[['Data','Janela','Fornecedor','Veiculo','Descarga','Regra','Placa','Volumes','Paletes','Peso','Pedido','NFe','Contato','Telefone']].concat(adminBookings.map(b=>[b.booking_date,b.slot_label,b.supplier,b.vehicle,b.unload_type,b.rule_label,b.plate,b.volumes,b.pallets,b.weight_kg,b.purchase_order,b.nfe,b.contact_name,b.phone]));let csv=rows.map(r=>r.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(';')).join('\n');let blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),aEl=document.createElement('a');aEl.href=url;aEl.download='agenda-jupter.csv';aEl.click();URL.revokeObjectURL(url)}
 sb.auth.onAuthStateChange(()=>{if(!$('admin').classList.contains('hidden'))renderAdmin()});
+$('date').min=isoLocal(new Date());
+document.querySelectorAll('label').forEach(label=>{const field=label.parentElement.querySelector('input,select,textarea');if(field)label.htmlFor=field.id});
 updateRule();
 </script>
 </body></html>
