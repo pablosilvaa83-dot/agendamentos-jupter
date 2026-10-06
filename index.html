@@ -32,8 +32,8 @@ body{background:#f4f6fa}header{background:#fff;color:var(--text);border-bottom:1
       <span class="eyebrow">PORTAL DO FORNECEDOR</span>
       <h2>Programe sua entrega<br>com tranquilidade.</h2>
       <p>Informe os dados da carga e escolha uma janela disponível para o recebimento na Jupter.</p>
-      <div class="welcome-info"><span><b>Segunda a sexta</b>Recebimento das 07h às 18h</span><span><b>Agendamento prévio</b>Atendimento por horário agendado</span></div>
-      <div class="notice">O recebimento segue o horário agendado, e não a ordem de chegada. Intervalo das 12h às 13h.</div>
+      <div class="welcome-info"><span><b>Segunda a sexta</b>Recebimento das 08h às 18h</span><span><b>Agendamento prévio</b></span></div>
+      <div class="notice"><b>Horário de almoço:</b> das 12h às 13h.</div>
     </div>
     <details class="card rules"><summary>Como funciona a reserva de horário?</summary>
       <p class="hint">A janela considera o veículo, o tipo de descarga e as regras do fornecedor.</p>
@@ -49,7 +49,7 @@ body{background:#f4f6fa}header{background:#fff;color:var(--text);border-bottom:1
     </div></div>
 
     <div class="card"><h2><span class="step">2</span> Dados da entrega</h2><p class="hint section-intro">As características da carga definem o tempo necessário para a descarga.</p><div class="grid3">
-      <div class="full"><label for="goodsType">Tipo de mercadoria *</label><select id="goodsType" required><option value="">Selecione o tipo de mercadoria</option><option value="CHOCOLATES/RECHEIOS">CHOCOLATES/RECHEIOS</option><option value="LEITE EM PÓ">LEITE EM PÓ</option><option value="MARGARINA/GORDURAS">MARGARINA/GORDURAS</option><option value="MOLHOS">MOLHOS</option><option value="VINHOS">VINHOS</option><option value="LEITE CONDENSADO/ CREME DE LEITE">LEITE CONDENSADO/ CREME DE LEITE</option><option value="EPS">EPS</option><option value="TERMOFORMADOS">TERMOFORMADOS</option><option value="PS">PS</option><option value="ALUMÍNIO">ALUMÍNIO</option><option value="ACRÍLICO">ACRÍLICO</option><option value="PAPEL/ PAPELÃO">PAPEL/ PAPELÃO</option><option value="SACOLAS">SACOLAS</option><option value="PP/ BD">PP/ BD</option></select></div>
+      <div class="full"><label for="goodsType">Tipo de mercadoria *</label><select id="goodsType" required disabled><option value="">Carregando tipos de mercadoria...</option></select><span id="goodsLoadMsg" class="small" role="status"></span></div>
       <div><label>Veículo *</label><select id="vehicle"><option value="">Selecione</option><option>CARRETA</option><option>BI-TREM</option><option>TRUCK</option><option>VAN</option></select></div>
       <div><label>Tipo de descarga *</label><select id="unload"><option value="">Selecione</option><option>PALETIZADO</option><option>BATIDO</option></select></div>
       <div id="batidoWrap" class="hidden"><label>Duração batido *</label><select id="batido"><option value="2">2 horários</option><option value="3">3 horários</option></select></div>
@@ -70,10 +70,10 @@ body{background:#f4f6fa}header{background:#fff;color:var(--text);border-bottom:1
   <section id="admin" class="hidden">
   <div class="card" id="adminLoginCard">
     <h2>Área interna — Recebimento</h2>
-    <div class="hint">Acesso restrito à equipe da Jupter. Informe o e-mail administrativo para receber um link seguro de acesso.</div>
+    <div class="hint">Acesso restrito à equipe da Jupter. Entre com seu e-mail e senha, sem necessidade de receber um link.</div>
     <div class="grid" style="margin-top:14px">
       <div><label>E-mail administrativo</label><input id="adminEmail" type="email" value="suprimentos@jupterembalagens.com.br"></div>
-      <div style="display:flex;align-items:end"><button class="btn primary" id="loginBtn" style="width:100%">Enviar link de acesso</button></div>
+      <div><label for="adminPassword">Senha</label><input id="adminPassword" type="password" autocomplete="current-password"></div><div><button class="btn primary" id="loginBtn">Entrar</button></div>
     </div>
     <div id="loginMsg" class="hint" style="margin-top:12px"></div>
   </div>
@@ -81,6 +81,21 @@ body{background:#f4f6fa}header{background:#fff;color:var(--text);border-bottom:1
     <div class="admin-top"><div><h2>Área interna — Recebimento</h2><div class="hint" id="adminWho">Banco online compartilhado • acesso autenticado</div></div><div class="actions"><button class="btn secondary" id="exportBtn">Exportar CSV</button><button class="btn danger" id="logoutBtn">Sair</button></div></div>
     <div class="kpis"><div class="kpi"><span>Agendamentos</span><b id="k1">0</b></div><div class="kpi"><span>Bloqueios especiais</span><b id="k2">0</b></div><div class="kpi"><span>Dia inteiro</span><b id="k3">0</b></div><div class="kpi"><span>Próximos 7 dias</span><b id="k4">0</b></div></div>
     <div style="overflow:auto"><table class="table"><thead><tr><th>Data</th><th>Fornecedor</th><th>Tipo de mercadoria</th><th>Veículo</th><th>Descarga</th><th>Reserva</th><th>Placa</th><th>Volumes</th><th>Ações</th></tr></thead><tbody id="rows"></tbody></table></div>
+
+    <hr style="border:0;border-top:1px solid var(--line);margin:28px 0">
+    <details open><summary>Tipos de mercadoria</summary>
+      <p class="hint">As opções cadastradas aqui aparecem automaticamente para os fornecedores.</p>
+      <form id="goodsForm" class="grid"><div><label for="newGoodsName">Novo tipo de mercadoria</label><input id="newGoodsName" required minlength="2" maxlength="100" placeholder="Digite o tipo de mercadoria"></div><div style="align-self:end"><button class="btn primary" id="addGoodsBtn">Cadastrar tipo</button></div></form>
+      <p id="goodsMsg" class="hint" role="status"></p><div id="goodsList" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+    </details>
+    <hr style="border:0;border-top:1px solid var(--line);margin:28px 0">
+    <details><summary>Usuários — cadastrar administrador</summary>
+      <p class="hint">Cadastre nome, e-mail e senha. O acesso fica liberado imediatamente, sem convite por e-mail. Administradores podem gerenciar agendamentos, mercadorias e usuários.</p>
+      <form id="userForm" class="grid"><div><label for="newUserName">Nome</label><input id="newUserName" required minlength="2" maxlength="100" autocomplete="off"></div><div><label for="newUserEmail">E-mail de acesso</label><input id="newUserEmail" type="email" required autocomplete="off"></div><div><label for="newUserPassword">Senha inicial (mínimo 10 caracteres)</label><input id="newUserPassword" type="password" required minlength="10" maxlength="128" autocomplete="new-password"></div><div style="align-self:end"><button class="btn primary" id="addUserBtn">Cadastrar usuário</button></div></form>
+      <p id="userMsg" class="hint" role="status"></p><div id="userList" class="hint"></div>
+    </details>
+    <hr style="border:0;border-top:1px solid var(--line);margin:28px 0">
+    <details><summary>Minha senha</summary><p class="hint">Defina uma nova senha para seu acesso.</p><form id="passwordForm" class="grid"><div><label for="ownPassword">Nova senha</label><input id="ownPassword" type="password" required minlength="10" maxlength="128" autocomplete="new-password"></div><div><label for="ownPasswordConfirm">Repita a nova senha</label><input id="ownPasswordConfirm" type="password" required minlength="10" maxlength="128" autocomplete="new-password"></div><div><button class="btn secondary" id="passwordBtn">Salvar senha</button></div></form><p id="passwordMsg" role="status" class="hint"></p></details>
   </div>
 </section>
 </div>
@@ -90,7 +105,7 @@ const SUPABASE_URL='https://xyzyqigkagclrddyfhpe.supabase.co';
 const SUPABASE_KEY='sb_publishable_7GNeHIIqVSSEv-Eg8K_Mpw_Y2AsHGix';
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 const ADMIN_EMAIL='suprimentos@jupterembalagens.com.br';
-const morningSlots=['07:00','08:00','09:00','10:00','11:00'];
+const morningSlots=['08:00','09:00','10:00','11:00'];
 const afternoonSlots=['13:00','14:00','15:00','16:00','17:00','18:00'];
 const baseSlots=[...morningSlots,...afternoonSlots];
 const $=id=>document.getElementById(id);
@@ -98,8 +113,27 @@ let adminBookings=[];
 const tabs=document.querySelectorAll('.tab');
 tabs.forEach(b=>b.onclick=async()=>{tabs.forEach(x=>x.classList.remove('active'));b.classList.add('active');['booking','agenda','admin'].forEach(x=>$(x).classList.add('hidden'));$(b.dataset.tab).classList.remove('hidden'); if(b.dataset.tab==='agenda') await renderWeek(); if(b.dataset.tab==='admin') await renderAdmin();});
 $('unload').onchange=()=>{$('batidoWrap').classList.toggle('hidden',$('unload').value!=='BATIDO');updateRule()};$('vehicle').onchange=updateRule;$('supplier').oninput=updateRule;$('batido').onchange=updateRule;$('date').onchange=refreshSlots;
-const goodsTypes=["CHOCOLATES/RECHEIOS","LEITE EM PÓ","MARGARINA/GORDURAS","MOLHOS","VINHOS","LEITE CONDENSADO/ CREME DE LEITE","EPS","TERMOFORMADOS","PS","ALUMÍNIO","ACRÍLICO","PAPEL/ PAPELÃO","SACOLAS","PP/ BD"];
-function bookingGoodsType(booking){const firstLine=String(booking.notes||'').split('\n')[0];const type=firstLine.startsWith('Tipo de mercadoria: ')?firstLine.slice('Tipo de mercadoria: '.length):'';return goodsTypes.includes(type)?type:'Não informado'}
+let goodsTypes=[];
+let goodsLoaded=false;
+let goodsLoading=false;
+function bookingGoodsType(booking){const firstLine=String(booking.notes||'').split('\n')[0];const type=firstLine.startsWith('Tipo de mercadoria: ')?firstLine.slice('Tipo de mercadoria: '.length):'';return type||'Não informado'}
+function esc(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+async function loadGoodsTypes(){
+ if(goodsLoading)return;goodsLoading=true;
+ try{const {data,error}=await sb.from('goods_types').select('name').order('name');if(error)throw error;
+ const names=(data||[]).map(x=>x.name),current=$('goodsType').value;
+ if(!goodsLoaded||JSON.stringify(names)!==JSON.stringify(goodsTypes)){
+ goodsTypes=names;$('goodsType').replaceChildren(new Option('Selecione o tipo de mercadoria',''),...names.map(name=>new Option(name,name)));
+ if(names.includes(current))$('goodsType').value=current;
+ $('goodsList').replaceChildren(...names.map(name=>{const item=document.createElement('span');item.className='badge';item.textContent=name;return item}));}
+ goodsLoaded=true;$('goodsType').disabled=false;$('goodsLoadMsg').textContent='';
+ }catch{$('goodsLoadMsg').textContent='Não foi possível atualizar os tipos. Tentaremos novamente automaticamente.';}
+ finally{goodsLoading=false;}
+}
+async function loadUsers(){const {data,error}=await sb.from('admin_emails').select('email').order('email');$('userList').textContent=error?'Não foi possível carregar os usuários.':'Administradores: '+(data||[]).map(x=>x.email).join(' • ')}
+$('goodsForm').onsubmit=async event=>{event.preventDefault();const name=$('newGoodsName').value.trim().toUpperCase();if(name.length<2||name.length>100||/[\r\n]/.test(name))return;$('addGoodsBtn').disabled=true;try{const {error}=await sb.from('goods_types').insert({name});if(error){$('goodsMsg').textContent=error.code==='23505'?'Este tipo já está cadastrado.':'Não foi possível cadastrar. Verifique seu acesso.';return}$('goodsForm').reset();$('goodsMsg').textContent='Tipo cadastrado e disponível para os fornecedores.';await loadGoodsTypes()}catch{$('goodsMsg').textContent='Falha de conexão. Tente novamente.'}finally{$('addGoodsBtn').disabled=false}};
+$('userForm').onsubmit=async event=>{event.preventDefault();$('addUserBtn').disabled=true;$('userMsg').textContent='Cadastrando...';try{const {data:{session}}=await sb.auth.getSession();if(!session)throw Error('Entre novamente na área interna.');const response=await fetch(SUPABASE_URL+'/functions/v1/admin-users',{method:'POST',headers:{'Content-Type':'application/json',apikey:SUPABASE_KEY,Authorization:'Bearer '+session.access_token},body:JSON.stringify({action:'create',name:$('newUserName').value.trim(),email:$('newUserEmail').value.trim(),password:$('newUserPassword').value})});const result=await response.json();if(!response.ok)throw Error(result.error||'Não foi possível cadastrar.');$('userForm').reset();$('userMsg').textContent=result.message;await loadUsers()}catch(error){$('userMsg').textContent=error.message||'Falha de conexão.'}finally{$('addUserBtn').disabled=false}};
+$('passwordForm').onsubmit=async event=>{event.preventDefault();if($('ownPassword').value!==$('ownPasswordConfirm').value){$('passwordMsg').textContent='As senhas não conferem.';return}$('passwordBtn').disabled=true;try{const {error}=await sb.auth.updateUser({password:$('ownPassword').value});if(error)throw error;$('passwordForm').reset();$('passwordMsg').textContent='Senha atualizada.'}catch{$('passwordMsg').textContent='Não foi possível atualizar a senha. Entre novamente e tente outra vez.'}finally{$('passwordBtn').disabled=false}};
 function norm(s){return (s||'').trim().toUpperCase()}
 function rule(){const sup=norm($('supplier').value),veh=$('vehicle').value,un=$('unload').value;let kind='slot',hours=1,label='1 horário';let special=false;
  if(veh==='CARRETA'){kind='half';label='meio período'} if(veh==='BI-TREM'){kind='day';label='dia inteiro'}
@@ -123,24 +157,28 @@ async function refreshSlots(){const request=++availabilityRequest,d=$('date').va
  if(!valid.length)sel.innerHTML='<option value="">Sem disponibilidade para esta regra</option>';
  }catch(error){if(request!==availabilityRequest)return;sel.innerHTML='<option value="">Não foi possível consultar. Selecione a data novamente.</option>';}
 }
-function valid(){return $('goodsType').value&&$('supplier').value.trim()&&$('contact').value&&$('phone').value&&$('driver').value&&$('plate').value&&$('vehicle').value&&$('unload').value&&$('volumes').value&&$('date').value&&$('slot').value}
+function valid(){return goodsLoaded&&goodsTypes.includes($('goodsType').value)&&$('supplier').value.trim()&&$('contact').value&&$('phone').value&&$('driver').value&&$('plate').value&&$('vehicle').value&&$('unload').value&&$('volumes').value&&$('date').value&&$('slot').value}
 $('bookBtn').onclick=async()=>{if(!valid()){alert('Preencha os campos obrigatórios e escolha uma janela disponível.');return}const r=rule(); if(r.supplier==='FIBRAFORM'&&!['CARRETA','BI-TREM'].includes(r.vehicle)){alert('Para FIBRAFORM, selecione CARRETA ou BI-TREM.');return}const opt=$('slot').selectedOptions[0],occ=(opt.dataset.occ||'').split(',').filter(Boolean);$('bookBtn').disabled=true;$('bookBtn').textContent='Confirmando...';
  const {data,error}=await sb.rpc('create_booking',{p_booking_date:$('date').value,p_slot_label:$('slot').value,p_occupied_slots:occ,p_supplier:$('supplier').value,p_cnpj:$('cnpj').value||null,p_contact_name:$('contact').value,p_phone:$('phone').value,p_driver_name:$('driver').value,p_plate:$('plate').value.toUpperCase(),p_vehicle:r.vehicle,p_unload_type:r.unload,p_volumes:Number($('volumes').value),p_pallets:$('pallets').value?Number($('pallets').value):null,p_weight_kg:$('weight').value?Number($('weight').value):null,p_purchase_order:$('po').value||null,p_nfe:$('nfe').value||null,p_sku_count:$('skus').value?Number($('skus').value):null,p_notes:'Tipo de mercadoria: '+$('goodsType').value+($('notes').value.trim()?'\n'+$('notes').value.trim():''),p_rule_label:r.label,p_is_special:r.special});
- $('bookBtn').disabled=false;$('bookBtn').textContent='Confirmar agendamento';if(error){alert(error.message||'Não foi possível concluir o agendamento.');await refreshSlots();return}$('summary').classList.add('show');$('summary').innerHTML=`<b>Agendamento confirmado.</b><br>${$('supplier').value} • ${$('date').value.split('-').reverse().join('/')} • ${$('slot').value}<br>Tipo de mercadoria: ${$('goodsType').value}<br><span class="small">Código: ${data}. A agenda online foi bloqueada automaticamente em: ${occ.join(', ')}</span>`;await refreshSlots();};
+ $('bookBtn').disabled=false;$('bookBtn').textContent='Confirmar agendamento';if(error){alert(error.message||'Não foi possível concluir o agendamento.');await refreshSlots();return}$('summary').classList.add('show');$('summary').innerHTML=`<b>Agendamento confirmado.</b><br>${esc($('supplier').value)} • ${$('date').value.split('-').reverse().join('/')} • ${$('slot').value}<br>Tipo de mercadoria: ${esc($('goodsType').value)}<br><span class="small">Código: ${data}. A agenda online foi bloqueada automaticamente em: ${occ.join(', ')}</span>`;await refreshSlots();};
 $('clearBtn').onclick=()=>location.reload();
 function monday(d){let x=new Date(d+'T12:00:00');let day=x.getDay(),diff=(day===0?-6:1-day);x.setDate(x.getDate()+diff);return x}
 function isoLocal(x){const y=x.getFullYear(),m=String(x.getMonth()+1).padStart(2,'0'),d=String(x.getDate()).padStart(2,'0');return `${y}-${m}-${d}`}
 async function renderWeek(){let start=$('weekDate').value?monday($('weekDate').value):monday(isoLocal(new Date()));$('weekDate').value=isoLocal(start);let days=[];for(let i=0;i<5;i++){let x=new Date(start);x.setDate(x.getDate()+i);days.push(x)}let from=isoLocal(days[0]),to=isoLocal(days[4]);const {data,error}=await sb.from('agenda_blocks').select('booking_date,slot').gte('booking_date',from).lte('booking_date',to);let blocks=error?[]:(data||[]);let html='<div class="week"><div class="cell head">Horário</div>'+days.map(d=>`<div class="cell head">${d.toLocaleDateString('pt-BR',{weekday:'short',day:'2-digit',month:'2-digit'})}</div>`).join('');baseSlots.forEach(t=>{html+=`<div class="cell time">${t}</div>`;days.forEach(d=>{let ds=isoLocal(d),busy=blocks.some(x=>x.booking_date===ds&&x.slot===t);html+=busy?`<div class="cell booked">Ocupado<br><span class="small">Horário reservado</span></div>`:`<div class="cell free">Disponível</div>`});});html+='</div>';$('weekSchedule').innerHTML=html}
 $('weekDate').onchange=renderWeek;
-async function renderAdmin(){const {data:{session}}=await sb.auth.getSession();if(!session){$('adminLoginCard').classList.remove('hidden');$('adminPanel').classList.add('hidden');return}const {data:isAdmin,error}=await sb.rpc('is_admin');if(error||!isAdmin){$('loginMsg').textContent='Este usuário não possui permissão administrativa.';$('adminLoginCard').classList.remove('hidden');$('adminPanel').classList.add('hidden');await sb.auth.signOut();return}$('adminLoginCard').classList.add('hidden');$('adminPanel').classList.remove('hidden');$('adminWho').textContent=`Conectado como ${session.user.email} • banco online compartilhado`;await loadAdminBookings();}
-async function loadAdminBookings(){const {data,error}=await sb.from('bookings').select('*').eq('status','confirmed').order('booking_date',{ascending:true}).order('slot_label',{ascending:true});if(error){$('rows').innerHTML='<tr><td colspan="9">Erro ao carregar agendamentos.</td></tr>';return}adminBookings=data||[];let now=new Date(),limit=new Date();limit.setDate(limit.getDate()+7);$('k1').textContent=adminBookings.length;$('k2').textContent=adminBookings.filter(x=>x.is_special).length;$('k3').textContent=adminBookings.filter(x=>(x.rule_label||'').includes('dia inteiro')).length;$('k4').textContent=adminBookings.filter(x=>{let d=new Date(x.booking_date+'T12:00:00');return d>=new Date(now.toDateString())&&d<=limit}).length;$('rows').innerHTML=adminBookings.map(b=>`<tr><td>${b.booking_date.split('-').reverse().join('/')}<br><b>${b.slot_label}</b></td><td>${b.supplier}${b.is_special?'<br><span class="badge">especial</span>':''}</td><td>${bookingGoodsType(b)}</td><td>${b.vehicle}</td><td>${b.unload_type}</td><td>${b.rule_label}</td><td>${b.plate}</td><td>${b.volumes}</td><td><button class="btn danger" style="padding:7px 9px" onclick="cancelBooking('${b.id}')">Cancelar</button></td></tr>`).join('')||'<tr><td colspan="9">Nenhum agendamento confirmado.</td></tr>'}
-$('loginBtn').onclick=async()=>{const email=($('adminEmail').value||'').trim().toLowerCase();if(email!==ADMIN_EMAIL){$('loginMsg').textContent='E-mail não autorizado para a área interna.';return}$('loginBtn').disabled=true;$('loginBtn').textContent='Enviando...';const {error}=await sb.auth.signInWithOtp({email,options:{emailRedirectTo:'https://agendamentos-jupter.vercel.app/'}});$('loginBtn').disabled=false;$('loginBtn').textContent='Enviar link de acesso';$('loginMsg').textContent=error?('Erro: '+error.message):'Link enviado. Abra o e-mail e clique no link para entrar.';}
+async function renderAdmin(){const {data:{session}}=await sb.auth.getSession();if(!session){$('adminLoginCard').classList.remove('hidden');$('adminPanel').classList.add('hidden');return}const {data:isAdmin,error}=await sb.rpc('is_admin');if(error||!isAdmin){$('loginMsg').textContent='Este usuário não possui permissão administrativa.';$('adminLoginCard').classList.remove('hidden');$('adminPanel').classList.add('hidden');await sb.auth.signOut();return}$('adminLoginCard').classList.add('hidden');$('adminPanel').classList.remove('hidden');$('adminWho').textContent=`Conectado como ${session.user.email} • banco online compartilhado`;await Promise.all([loadAdminBookings(),loadGoodsTypes(),loadUsers()]);}
+async function loadAdminBookings(){const {data,error}=await sb.from('bookings').select('*').eq('status','confirmed').order('booking_date',{ascending:true}).order('slot_label',{ascending:true});if(error){$('rows').innerHTML='<tr><td colspan="9">Erro ao carregar agendamentos.</td></tr>';return}adminBookings=data||[];let now=new Date(),limit=new Date();limit.setDate(limit.getDate()+7);$('k1').textContent=adminBookings.length;$('k2').textContent=adminBookings.filter(x=>x.is_special).length;$('k3').textContent=adminBookings.filter(x=>(x.rule_label||'').includes('dia inteiro')).length;$('k4').textContent=adminBookings.filter(x=>{let d=new Date(x.booking_date+'T12:00:00');return d>=new Date(now.toDateString())&&d<=limit}).length;$('rows').innerHTML=adminBookings.map(b=>`<tr><td>${b.booking_date.split('-').reverse().join('/')}<br><b>${esc(b.slot_label)}</b></td><td>${esc(b.supplier)}${b.is_special?'<br><span class="badge">especial</span>':''}</td><td>${esc(bookingGoodsType(b))}</td><td>${esc(b.vehicle)}</td><td>${esc(b.unload_type)}</td><td>${esc(b.rule_label)}</td><td>${esc(b.plate)}</td><td>${esc(b.volumes)}</td><td><button class="btn danger" style="padding:7px 9px" onclick="cancelBooking('${b.id}')">Cancelar</button></td></tr>`).join('')||'<tr><td colspan="9">Nenhum agendamento confirmado.</td></tr>'}
+$('loginBtn').onclick=async()=>{const email=$('adminEmail').value.trim().toLowerCase(),password=$('adminPassword').value;if(!email||!password){$('loginMsg').textContent='Informe e-mail e senha.';return}$('loginBtn').disabled=true;$('loginMsg').textContent='Entrando...';try{const {error}=await sb.auth.signInWithPassword({email,password});if(error){$('loginMsg').textContent='E-mail ou senha inválidos.';return}$('adminPassword').value='';$('loginMsg').textContent='';await renderAdmin()}catch{$('loginMsg').textContent='Não foi possível conectar. Tente novamente.'}finally{$('loginBtn').disabled=false}};
+$('adminPassword').onkeydown=event=>{if(event.key==='Enter')$('loginBtn').click()};
 $('logoutBtn').onclick=async()=>{await sb.auth.signOut();await renderAdmin()};
 window.cancelBooking=async id=>{if(!confirm('Cancelar este agendamento e liberar os horários?'))return;const {error}=await sb.rpc('cancel_booking',{p_booking_id:id});if(error){alert(error.message);return}await loadAdminBookings();await renderWeek();}
 $('exportBtn').onclick=()=>{let rows=[['Data','Janela','Fornecedor','Tipo de mercadoria','Veiculo','Descarga','Regra','Placa','Volumes','Paletes','Peso','Pedido','NFe','Contato','Telefone']].concat(adminBookings.map(b=>[b.booking_date,b.slot_label,b.supplier,bookingGoodsType(b),b.vehicle,b.unload_type,b.rule_label,b.plate,b.volumes,b.pallets,b.weight_kg,b.purchase_order,b.nfe,b.contact_name,b.phone]));let csv=rows.map(r=>r.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(';')).join('\n');let blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),aEl=document.createElement('a');aEl.href=url;aEl.download='agenda-jupter.csv';aEl.click();URL.revokeObjectURL(url)}
-sb.auth.onAuthStateChange(()=>{if(!$('admin').classList.contains('hidden'))renderAdmin()});
+sb.auth.onAuthStateChange(()=>{setTimeout(()=>{if(!$('admin').classList.contains('hidden'))renderAdmin()},0)});
 $('date').min=isoLocal(new Date());
 document.querySelectorAll('label').forEach(label=>{const field=label.parentElement.querySelector('input,select,textarea');if(field)label.htmlFor=field.id});
+loadGoodsTypes();
+setInterval(()=>{if(document.visibilityState==='visible')loadGoodsTypes()},20000);
+window.addEventListener('focus',loadGoodsTypes);
 updateRule();
 </script>
 </body></html>
